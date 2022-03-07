@@ -79,12 +79,14 @@ def check_valid_word(selected):
       word: Palabra introducida por el usuario que estÃ¡ en la lista.
     """
     i=0
+    palabra=None
     while i!=1:
         palabra=input("introduzca una palabra que este en la lista porfavor:")
         palabraMayus=palabra.upper()
         for j in selected:
             if palabraMayus==selected[j].upper():
-                
+                    i=1
+    return palabra
 
 
 
