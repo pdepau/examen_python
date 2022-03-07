@@ -1,3 +1,4 @@
+from functools import partial
 from statistics import mode
 import random
 
@@ -38,7 +39,7 @@ def compare_words(word, secret):
         for k in secret:
             if word[j] == secret[k]:
                 same_letter.append[j]
-    
+    return same_position,same_letter
 
 
 
@@ -51,6 +52,15 @@ def print_word(word,same_letter_position,same_letter):
     Returns:
       transformed: La palabra aplicando las transformaciones. En el caso anterior: "Cam--"
     """
+    palabra="-----"
+    for i in same_letter_position:
+        palabra[same_letter_position[i]]=word[same_letter_position[i]]
+    for j in same_letter:
+        palabra[same_letter[j]]=word[same_letter[j]].lower()
+    transformed= palabra
+    return transformed
+        
+
     
 def choose_secret_advanced():
     """Dado un nombre de fichero, esta funciÃ³n filtra solo las palabras de 5 letras que no tienen acentos (Ã¡,Ã©,Ã­,Ã³,Ãº). De estas palabras, la funciÃ³n devuelve una lista de 15 aleatorias no repetidas y una de estas 15, se selecciona aleatoriamente como palabra secret.
@@ -61,13 +71,22 @@ def choose_secret_advanced():
       secret: Palabra elegida aleatoriamente de la lista de 15 seleccionadas transformada a mayÃºsculas
     """
  
-def check_valid_word():
+def check_valid_word(selected):
     """Dada una lista de palabras, esta funciÃ³n pregunta al usuario que introduzca una palabra hasta que introduzca una que estÃ© en la lista. Esta palabra es la que devolverÃ¡ la funciÃ³n.
     Args:
       selected: Lista de palabras.
     Returns:
       word: Palabra introducida por el usuario que estÃ¡ en la lista.
     """
+    i=0
+    while i!=1:
+        palabra=input("introduzca una palabra que este en la lista porfavor:")
+        palabraMayus=palabra.upper()
+        for j in selected:
+            if palabraMayus==selected[j].upper():
+                
+
+
 
 if __name__ == "__main__":
     secret=choose_secret()
