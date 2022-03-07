@@ -11,11 +11,14 @@ def choose_secret(filename):
       secret: Palabra elegida aleatoriamente del fichero transformada a mayÃºsculas. Ej. "CREMA"
     """
     fichero=open(filename,mode="rt",encoding="utf-8")
-    lista=fichero.readlines()
-    linea=random.choice(lista)
-    palabraSecreta=lista[linea]
-    palabraSecreta=palabraSecreta.upper()
-    return palabraSecreta
+    if fichero.readline()!="":
+        lista=fichero.readlines()
+        linea=random.choice(lista)
+        palabraSecreta=lista[linea]
+        palabraSecreta=palabraSecreta.upper()
+        return palabraSecreta
+    else:
+        raise ValueError("el fichero no tiene palabras")
 
     
 def compare_words(word, secret):
@@ -102,7 +105,10 @@ def check_valid_word(selected):
 
 
 if __name__ == "__main__":
-    secret=choose_secret()
+    try:
+        secret=choose_secret()
+    except ValueError:
+        print("fichero sin palabras")
     print("Palabra a adivinar: "+secret)#Debug: esto es para que sepas la palabra que debes adivinar
     for repeticiones in range(0,6):
         word = input("Introduce una nueva palabra: ")
