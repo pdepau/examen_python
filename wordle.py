@@ -31,15 +31,18 @@ def compare_words(word, secret):
     same_letter=[]
     same_position=[]
 
-    for i in secret:
-        if word[i] == secret[i]:
-            same_position.append(i)
+    if(word.len()==secret.len()):
+        for i in secret:
+            if word[i] == secret[i]:
+                same_position.append(i)
     
-    for j in word:
-        for k in secret:
-            if word[j] == secret[k]:
-                same_letter.append[j]
-    return same_position,same_letter
+        for j in word:
+            for k in secret:
+                if word[j] == secret[k]:
+                    same_letter.append[j]
+        return same_position,same_letter
+    else:
+        raise  ValueError("la longitud de las palabras recibidas no es la misma")
 
 
 
@@ -53,10 +56,18 @@ def print_word(word,same_letter_position,same_letter):
       transformed: La palabra aplicando las transformaciones. En el caso anterior: "Cam--"
     """
     palabra="-----"
+
     for i in same_letter_position:
-        palabra[same_letter_position[i]]=word[same_letter_position[i]]
+        if(same_letter_position[i]<6 and same_letter_position[i]>=0):
+            palabra[same_letter_position[i]]=word[same_letter_position[i]]
+        else:
+            raise ValueError("contiene valor negativo o mayor de la longitud de la palabra")
+        
     for j in same_letter:
-        palabra[same_letter[j]]=word[same_letter[j]].lower()
+        if(same_letter[j]<6 and same_letter[j]>=0):
+            palabra[same_letter[j]]=word[same_letter[j]].lower()
+        else:
+            raise ValueError("contiene valor negativo o mayor de la longitud de la palabra")
     transformed= palabra
     return transformed
         
@@ -95,8 +106,14 @@ if __name__ == "__main__":
     print("Palabra a adivinar: "+secret)#Debug: esto es para que sepas la palabra que debes adivinar
     for repeticiones in range(0,6):
         word = input("Introduce una nueva palabra: ")
-        same_position, same_letter = compare_words()
-        resultado=print_word()
+        try:
+            same_position, same_letter = compare_words()
+        except ValueError:
+            print("la longitud de las palabras no es la  misma")
+        try:
+            resultado=print_word()
+        except ValueError:
+            print("contiene valor negativo o mayor de la longitud de la palabra")
         print(resultado)
         if word == secret:
             print("HAS GANADO!!")
